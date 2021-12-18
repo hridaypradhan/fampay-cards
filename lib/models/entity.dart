@@ -1,5 +1,11 @@
 import 'dart:convert';
 
+import 'package:fampay_cards/global/constants/colors.dart';
+import 'package:fampay_cards/global/constants/enums.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class Entity {
   Entity({
     required this.text,
@@ -28,4 +34,16 @@ class Entity {
         "url": url,
         "font_style": fontStyle,
       };
+
+  static TextSpan formatText(String text, Entity entity) {
+    return TextSpan(
+      text: text,
+      recognizer: TapGestureRecognizer()
+        ..onTap = () async =>
+            entity.url == null ? null : await launch(entity.url ?? ''),
+      style: FontStyleEnum.toFontStyle(entity.fontStyle).copyWith(
+        color: stringToColor(entity.color),
+      ),
+    );
+  }
 }

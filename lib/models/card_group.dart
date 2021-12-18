@@ -13,8 +13,8 @@ class CardGroup {
 
   bool isScrollable;
   String name, designType;
-  double height;
-  List<Card> cards;
+  int height;
+  List<FampayCard> cards;
 
   factory CardGroup.fromJson(String str) => CardGroup.fromMap(json.decode(str));
 
@@ -24,10 +24,10 @@ class CardGroup {
         isScrollable: json["is_scrollable"],
         name: json["name"],
         designType: json["design_type"],
-        height: json["height"].toDouble(),
-        cards: List<Card>.from(
+        height: json["height"] ?? 50,
+        cards: List<FampayCard>.from(
           json["cards"].map(
-            (x) => Card.fromMap(x),
+            (x) => FampayCard.fromMap(x),
           ),
         ),
       );
