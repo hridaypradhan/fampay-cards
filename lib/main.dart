@@ -11,18 +11,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: GoogleFonts.roboto().fontFamily,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CardProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: GoogleFonts.roboto().fontFamily,
+        ),
+        initialRoute: HomeScreen.id,
+        routes: {
+          HomeScreen.id: (context) => const HomeScreen(),
+        },
       ),
-      initialRoute: HomeScreen.id,
-      routes: {
-        HomeScreen.id: (context) => ChangeNotifierProvider(
-              create: (context) => CardProvider(),
-              child: const HomeScreen(),
-            ),
-      },
     );
   }
 }

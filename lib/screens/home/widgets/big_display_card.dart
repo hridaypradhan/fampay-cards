@@ -7,7 +7,9 @@ import 'package:fampay_cards/global/widgets/text/hc3/hc3_title.dart';
 import 'package:fampay_cards/models/card.dart';
 import 'package:fampay_cards/models/card_image.dart';
 import 'package:fampay_cards/models/gradient.dart';
+import 'package:fampay_cards/providers/card_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BigDisplayCard extends StatefulWidget {
@@ -27,6 +29,7 @@ class _BigDisplayCardState extends State<BigDisplayCard> {
 
   @override
   Widget build(BuildContext context) {
+    var cardProvider = Provider.of<CardProvider>(context);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -46,12 +49,16 @@ class _BigDisplayCardState extends State<BigDisplayCard> {
                 Hc3SlidableButton(
                   icon: Icons.notifications,
                   text: 'remind me',
-                  onPressed: () {},
+                  onPressed: () {
+                    cardProvider.temporaryRemoval(widget.card);
+                  },
                 ),
                 Hc3SlidableButton(
                   icon: Icons.close,
                   text: 'dismiss now',
-                  onPressed: () {},
+                  onPressed: () {
+                    cardProvider.permanentRemoval(widget.card);
+                  },
                 ),
               ],
             ),
