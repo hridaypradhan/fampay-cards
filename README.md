@@ -1,12 +1,12 @@
 # Fampay Cards
 
-GitHub Externship 2021 Frontend Extern Assignment
+GitHub Externship 2021 Frontend Extern Assignment for Fampay.
 
 ## Getting Started
 
 This project was made using Flutter, as approved by the Fampay mentor on Discord.
-Language: Dart
-State management: Provider
+  Language: Dart
+  State management: Provider
 
 ## Features
 
