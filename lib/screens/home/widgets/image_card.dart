@@ -1,4 +1,6 @@
 import 'package:fampay_cards/global/constants/colors.dart';
+import 'package:fampay_cards/global/widgets/text/hc5/hc5_description.dart';
+import 'package:fampay_cards/global/widgets/text/hc5/hc5_formatted_description.dart';
 import 'package:fampay_cards/global/widgets/text/hc5/hc5_formatted_title.dart';
 import 'package:fampay_cards/global/widgets/text/hc5/hc5_title.dart';
 import 'package:fampay_cards/models/contextual_card.dart';
@@ -42,8 +44,8 @@ class ImageCard extends StatelessWidget {
                         formattedText: card.formattedTitle,
                       ),
                 card.formattedDescription == null
-                    ? Hc5Title(text: card.description)
-                    : Hc5FormattedTitle(
+                    ? Hc5Description(text: card.description)
+                    : Hc5FormattedDescription(
                         formattedText: card.formattedDescription,
                       ),
               ],

@@ -1,5 +1,7 @@
 import 'package:fampay_cards/global/constants/colors.dart';
 import 'package:fampay_cards/global/widgets/custom_list_tile.dart';
+import 'package:fampay_cards/global/widgets/text/hc1/hc1_description.dart';
+import 'package:fampay_cards/global/widgets/text/hc1/hc1_formatted_description.dart';
 import 'package:fampay_cards/global/widgets/text/hc1/hc1_formatted_title.dart';
 import 'package:fampay_cards/global/widgets/text/hc1/hc1_title.dart';
 import 'package:fampay_cards/models/contextual_card.dart';
@@ -37,8 +39,8 @@ class SmallDisplayCard extends StatelessWidget {
                   formattedText: card.formattedTitle,
                 ),
           subtitle: card.formattedDescription == null
-              ? Hc1Title(text: card.description)
-              : Hc1FormattedTitle(
+              ? Hc1Description(text: card.description)
+              : Hc1FormattedDescription(
                   formattedText: card.formattedDescription,
                 ),
           leading: SizedBox(
