@@ -10,7 +10,7 @@ import 'package:fampay_cards/models/gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class BigDisplayCard extends StatelessWidget {
+class BigDisplayCard extends StatefulWidget {
   final FampayCard card;
   const BigDisplayCard({
     Key? key,
@@ -18,43 +18,93 @@ class BigDisplayCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<BigDisplayCard> createState() => _BigDisplayCardState();
+}
+
+class _BigDisplayCardState extends State<BigDisplayCard> {
+  ScrollController scrollController = ScrollController();
+  bool isEnd = true;
+
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: card.url == null ? null : () async => await launch(card.url ?? ''),
-      onLongPress: () {},
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.95,
-        decoration: BoxDecoration(
-          image: CardImage.toDecorationImage(card.bgImage, 1),
-          borderRadius: BorderRadius.circular(12.0),
-          color: stringToColor(card.bgColor),
-          gradient: card.bgGradient!.colors.length >= 2
-              ? FampayGradient.toWidget(card.bgGradient)
-              : null,
-        ),
-        height: 350.0,
-        margin: const EdgeInsets.all(10.0),
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      margin: const EdgeInsets.all(10.0),
+      width: MediaQuery.of(context).size.width * 0.95,
+      child: SingleChildScrollView(
+        reverse: true,
+        controller: scrollController,
+        scrollDirection: Axis.horizontal,
+        physics: const NeverScrollableScrollPhysics(),
+        child: Row(
           children: [
-            card.formattedTitle == null
-                ? Hc3Title(text: card.title)
-                : Hc3FormattedTitle(
-                    formattedText: card.formattedTitle,
-                  ),
-            const SizedBox(height: 10.0),
-            card.formattedDescription == null
-                ? Hc3Description(text: card.description)
-                : Hc3FormattedDescription(
-                    formattedText: card.formattedDescription,
-                  ),
-            const SizedBox(height: 30.0),
-            Row(
-              children: List.generate(
-                card.cta!.length,
-                (index) => CtaButton(cta: card.cta![index]),
+            Column(
+              children: [
+                Hc3SlidableButton(
+                  icon: Icons.notifications,
+                  text: 'remind me',
+                  onPressed: () {},
+                ),
+                Hc3SlidableButton(
+                  icon: Icons.close,
+                  text: 'dismiss now',
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: widget.card.url == null
+                  ? null
+                  : () async => await launch(widget.card.url ?? ''),
+              onLongPress: () {
+                scrollController.animateTo(
+                  isEnd
+                      ? scrollController.position.minScrollExtent
+                      : scrollController.position.maxScrollExtent,
+                  duration: const Duration(milliseconds: 600),
+                  curve: Curves.decelerate,
+                );
+                isEnd = !isEnd;
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.95,
+                decoration: BoxDecoration(
+                  image: CardImage.toDecorationImage(widget.card.bgImage, 1),
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: stringToColor(widget.card.bgColor),
+                  gradient: widget.card.bgGradient!.colors.length >= 2
+                      ? FampayGradient.toWidget(widget.card.bgGradient)
+                      : null,
+                ),
+                height: 350.0,
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    widget.card.formattedTitle == null
+                        ? Hc3Title(text: widget.card.title)
+                        : Hc3FormattedTitle(
+                            formattedText: widget.card.formattedTitle,
+                          ),
+                    const SizedBox(height: 10.0),
+                    widget.card.formattedDescription == null
+                        ? Hc3Description(text: widget.card.description)
+                        : Hc3FormattedDescription(
+                            formattedText: widget.card.formattedDescription,
+                          ),
+                    const SizedBox(height: 30.0),
+                    Row(
+                      children: List.generate(
+                        widget.card.cta!.length,
+                        (index) => CtaButton(cta: widget.card.cta![index]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -86,6 +136,8 @@ class Hc3SlidableButton extends StatelessWidget {
           color: homeBackgroundColor,
           borderRadius: BorderRadius.circular(12.0),
         ),
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             Icon(
