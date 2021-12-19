@@ -1,14 +1,17 @@
-# fampay_cards
+# Fampay Cards
 
 GitHub Externship 2021 Frontend Extern Assignment
 
 ## Getting Started
 
 This project was made using Flutter, as approved by the Fampay mentor on Discord.
+Language: Dart
+State management: Provider
 
 ## Features
 
 - All tap-to-launch links have been handled
+- The API call is made at app launch using the http package.
 - When you long-press an HC3 card (this may take a couple attempts depending on the render speed on your device), it slides to the right revealing the menu
   - Press 'remind later' to temporarily remove it from view
   - Press 'dismiss now' to permanently remove it.
