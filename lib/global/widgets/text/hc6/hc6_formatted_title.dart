@@ -1,3 +1,4 @@
+import 'package:fampay_cards/global/constants/colors.dart';
 import 'package:fampay_cards/models/formatted_text.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class Hc6FormattedTitle extends StatelessWidget {
         style: const TextStyle(
           fontSize: 14.0,
           fontWeight: FontWeight.w500,
+          color: logoColor,
         ),
       ),
     );

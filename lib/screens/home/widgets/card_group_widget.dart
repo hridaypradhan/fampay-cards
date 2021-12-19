@@ -11,18 +11,25 @@ class CardGroupWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(
-          cardGroup.cards.length,
-          (index) => DesignTypeEnum.toWidget(
-            cardGroup.designType,
-            cardGroup.cards[index],
-            cardGroup.height,
-          ),
+    var cardRow = Row(
+      children: List.generate(
+        cardGroup.cards.length,
+        (index) => DesignTypeEnum.toWidget(
+          cardGroup.designType,
+          cardGroup.cards[index],
+          cardGroup.height,
         ),
       ),
     );
+    if (cardGroup.designType != DesignTypeEnum.hc9 &&
+        cardGroup.cards.length > 1 &&
+        cardGroup.isScrollable) {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: cardRow,
+      );
+    } else {
+      return cardRow;
+    }
   }
 }

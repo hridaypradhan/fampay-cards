@@ -1,3 +1,4 @@
+import 'package:fampay_cards/global/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class Hc1Description extends StatelessWidget {
@@ -14,6 +15,7 @@ class Hc1Description extends StatelessWidget {
       style: const TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w400,
+        color: logoColor,
       ),
     );
   }

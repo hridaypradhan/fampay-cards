@@ -31,22 +31,36 @@ class CardImage {
   static Image toWidget(CardImage? cardImage) {
     if (cardImage?.imageType == 'ass' || cardImage?.imageType == 'asset') {
       return Image.asset(
-        cardImage?.assetType ?? '',
+        cardImage?.assetType ?? 'd',
         errorBuilder: (context, object, stackTrace) => Container(),
       );
     } else {
       return Image.network(
-        cardImage?.imageUrl ?? '',
+        cardImage?.imageUrl ?? 'c',
         errorBuilder: (context, object, stackTrace) => Container(),
       );
     }
   }
 
-  static ImageProvider toImageProvider(CardImage? cardImage) {
-    if (cardImage?.imageType == 'ass' || cardImage?.imageType == 'asset') {
-      return AssetImage(cardImage?.assetType ?? '');
+  static DecorationImage? toDecorationImage(
+      CardImage? cardImage, double opacity) {
+    if (cardImage == null ||
+        cardImage.assetType == '' && cardImage.imageUrl == '') return null;
+    if (cardImage.imageType == 'ass' || cardImage.imageType == 'asset') {
+      return cardImage.assetType == null
+          ? null
+          : DecorationImage(
+              opacity: opacity,
+              image: AssetImage(cardImage.assetType ?? 'b'),
+            );
     } else {
-      return NetworkImage(cardImage?.imageUrl ?? '');
+      return cardImage.assetType == null
+          ? null
+          : DecorationImage(
+              fit: BoxFit.fitHeight,
+              opacity: opacity,
+              image: NetworkImage(cardImage.imageUrl ?? 'a'),
+            );
     }
   }
 }

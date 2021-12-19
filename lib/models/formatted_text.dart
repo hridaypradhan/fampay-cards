@@ -36,11 +36,11 @@ class FormattedText {
     if (tokens != null) {
       for (String token in tokens) {
         if (token != '{}') {
-          children.add(TextSpan(text: token));
+          children.add(TextSpan(text: token + ' '));
         } else {
           children.add(
             Entity.formatText(
-              token,
+              token + ' ',
               formattedText!.entities[entityIndex],
             ),
           );

@@ -1,15 +1,16 @@
 import 'package:fampay_cards/global/constants/colors.dart';
 import 'package:fampay_cards/global/widgets/cta_button.dart';
+import 'package:fampay_cards/global/widgets/text/hc3/hc3_description.dart';
+import 'package:fampay_cards/global/widgets/text/hc3/hc3_formatted_description.dart';
 import 'package:fampay_cards/global/widgets/text/hc3/hc3_formatted_title.dart';
 import 'package:fampay_cards/global/widgets/text/hc3/hc3_title.dart';
 import 'package:fampay_cards/models/card.dart';
 import 'package:fampay_cards/models/card_image.dart';
 import 'package:fampay_cards/models/gradient.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class BigDisplayCard extends StatefulWidget {
+class BigDisplayCard extends StatelessWidget {
   final FampayCard card;
   const BigDisplayCard({
     Key? key,
@@ -17,94 +18,45 @@ class BigDisplayCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<BigDisplayCard> createState() => _BigDisplayCardState();
-}
-
-class _BigDisplayCardState extends State<BigDisplayCard>
-    with SingleTickerProviderStateMixin {
-  SlidableController? slidableController;
-
-  @override
-  void dispose() {
-    slidableController?.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    slidableController = SlidableController(this);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.card.url == null
-          ? null
-          : () async => await launch(widget.card.url ?? ''),
-      onLongPress: () => slidableController?.openStartActionPane(),
-      child: Slidable(
-        key: const ValueKey(0),
-        startActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(12.0),
-                  bottomLeft: Radius.circular(12.0),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Hc3SlidableButton(
-                    icon: Icons.notifications,
-                    text: 'remind later',
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 20.0),
-                  Hc3SlidableButton(
-                    icon: Icons.close,
-                    text: 'dismiss now',
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        enabled: false,
+    return FittedBox(
+      child: GestureDetector(
+        onTap:
+            card.url == null ? null : () async => await launch(card.url ?? ''),
+        onLongPress: () {},
         child: Container(
+          width: MediaQuery.of(context).size.width * 0.95,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: CardImage.toImageProvider(widget.card.bgImage),
-            ),
+            image: CardImage.toDecorationImage(card.bgImage, 1),
             borderRadius: BorderRadius.circular(12.0),
-            color: stringToColor(widget.card.bgColor),
-            gradient: widget.card.bgGradient!.colors.length >= 2
-                ? FampayGradient.toWidget(widget.card.bgGradient)
+            color: stringToColor(card.bgColor),
+            gradient: card.bgGradient!.colors.length >= 2
+                ? FampayGradient.toWidget(card.bgGradient)
                 : null,
           ),
           height: 350.0,
-          margin: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardImage.toWidget(widget.card.icon),
-              widget.card.formattedTitle == null
-                  ? Hc3Title(text: widget.card.title)
+              card.formattedTitle == null
+                  ? Hc3Title(text: card.title)
                   : Hc3FormattedTitle(
-                      formattedText: widget.card.formattedTitle,
+                      formattedText: card.formattedTitle,
                     ),
-              widget.card.formattedDescription == null
-                  ? Hc3Title(text: widget.card.description)
-                  : Hc3FormattedTitle(
-                      formattedText: widget.card.formattedDescription,
+              const SizedBox(height: 10.0),
+              card.formattedDescription == null
+                  ? Hc3Description(text: card.description)
+                  : Hc3FormattedDescription(
+                      formattedText: card.formattedDescription,
                     ),
+              const SizedBox(height: 30.0),
               Row(
                 children: List.generate(
-                  widget.card.cta!.length,
-                  (index) => CtaButton(cta: widget.card.cta![index]),
+                  card.cta!.length,
+                  (index) => CtaButton(cta: card.cta![index]),
                 ),
               ),
             ],

@@ -9,6 +9,8 @@ import 'package:http/http.dart';
 
 class HomeScreen extends StatelessWidget {
   static const id = '/home_screen';
+  static const url =
+      'https://run.mocky.io/v3/fefcfbeb-5c12-4722-94ad-b8f92caad1ad';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -31,10 +33,12 @@ class HomeScreen extends StatelessWidget {
                       Map<String, dynamic> data =
                           jsonDecode(snapshot.data!.body);
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: List.generate(
                           data['card_groups'].length,
                           (index) => CardGroupWidget(
-                            cardGroup: CardGroup.fromMap(data['card_groups'][index]),
+                            cardGroup:
+                                CardGroup.fromMap(data['card_groups'][index]),
                           ),
                         ),
                       );
@@ -61,7 +65,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   Future<Response> getData() async => get(
-        Uri.parse(
-            'https://run.mocky.io/v3/fefcfbeb-5c12-4722-94ad-b8f92caad1ad'),
+        Uri.parse(url),
       );
 }

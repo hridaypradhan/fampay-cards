@@ -19,17 +19,17 @@ class ImageCard extends StatelessWidget {
     return GestureDetector(
       onTap: card.url == null ? null : () async => await launch(card.url ?? ''),
       child: Container(
+        width: MediaQuery.of(context).size.width * 0.95,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: CardImage.toImageProvider(card.bgImage),
-          ),
+          image: CardImage.toDecorationImage(card.bgImage, 1),
           borderRadius: BorderRadius.circular(12.0),
           color: stringToColor(card.bgColor),
           gradient: card.bgGradient!.colors.length >= 2
               ? FampayGradient.toWidget(card.bgGradient)
               : null,
         ),
-        margin: const EdgeInsets.all(20.0),
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(25.0),
         child: Row(
           children: [
             CardImage.toWidget(card.icon),
