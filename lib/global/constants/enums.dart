@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:fampay_cards/models/card.dart';
+import 'package:fampay_cards/models/contextual_card.dart';
 import 'package:fampay_cards/screens/home/widgets/big_display_card.dart';
 import 'package:fampay_cards/screens/home/widgets/dynamic_width_card.dart';
 import 'package:fampay_cards/screens/home/widgets/image_card.dart';

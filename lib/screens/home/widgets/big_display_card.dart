@@ -4,7 +4,7 @@ import 'package:fampay_cards/global/widgets/text/hc3/hc3_description.dart';
 import 'package:fampay_cards/global/widgets/text/hc3/hc3_formatted_description.dart';
 import 'package:fampay_cards/global/widgets/text/hc3/hc3_formatted_title.dart';
 import 'package:fampay_cards/global/widgets/text/hc3/hc3_title.dart';
-import 'package:fampay_cards/models/card.dart';
+import 'package:fampay_cards/models/contextual_card.dart';
 import 'package:fampay_cards/models/card_image.dart';
 import 'package:fampay_cards/models/gradient.dart';
 import 'package:fampay_cards/providers/card_provider.dart';

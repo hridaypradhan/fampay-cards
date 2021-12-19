@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fampay_cards/models/card.dart';
+import 'package:fampay_cards/models/contextual_card.dart';
 import 'package:fampay_cards/models/card_group.dart';
 import 'package:fampay_cards/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
