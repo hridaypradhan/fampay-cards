@@ -17,7 +17,7 @@ class Hc3FormattedDescription extends StatelessWidget {
         style: const TextStyle(
           fontSize: 12.0,
           fontWeight: FontWeight.w400,
-          color: logoColor,
+          color: primaryColor,
         ),
       ),
     );

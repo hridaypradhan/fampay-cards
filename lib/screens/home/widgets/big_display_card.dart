@@ -19,48 +19,45 @@ class BigDisplayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      child: GestureDetector(
-        onTap:
-            card.url == null ? null : () async => await launch(card.url ?? ''),
-        onLongPress: () {},
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.95,
-          decoration: BoxDecoration(
-            image: CardImage.toDecorationImage(card.bgImage, 1),
-            borderRadius: BorderRadius.circular(12.0),
-            color: stringToColor(card.bgColor),
-            gradient: card.bgGradient!.colors.length >= 2
-                ? FampayGradient.toWidget(card.bgGradient)
-                : null,
-          ),
-          height: 350.0,
-          margin: const EdgeInsets.all(10.0),
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              card.formattedTitle == null
-                  ? Hc3Title(text: card.title)
-                  : Hc3FormattedTitle(
-                      formattedText: card.formattedTitle,
-                    ),
-              const SizedBox(height: 10.0),
-              card.formattedDescription == null
-                  ? Hc3Description(text: card.description)
-                  : Hc3FormattedDescription(
-                      formattedText: card.formattedDescription,
-                    ),
-              const SizedBox(height: 30.0),
-              Row(
-                children: List.generate(
-                  card.cta!.length,
-                  (index) => CtaButton(cta: card.cta![index]),
-                ),
+    return GestureDetector(
+      onTap: card.url == null ? null : () async => await launch(card.url ?? ''),
+      onLongPress: () {},
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.95,
+        decoration: BoxDecoration(
+          image: CardImage.toDecorationImage(card.bgImage, 1),
+          borderRadius: BorderRadius.circular(12.0),
+          color: stringToColor(card.bgColor),
+          gradient: card.bgGradient!.colors.length >= 2
+              ? FampayGradient.toWidget(card.bgGradient)
+              : null,
+        ),
+        height: 350.0,
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(30.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            card.formattedTitle == null
+                ? Hc3Title(text: card.title)
+                : Hc3FormattedTitle(
+                    formattedText: card.formattedTitle,
+                  ),
+            const SizedBox(height: 10.0),
+            card.formattedDescription == null
+                ? Hc3Description(text: card.description)
+                : Hc3FormattedDescription(
+                    formattedText: card.formattedDescription,
+                  ),
+            const SizedBox(height: 30.0),
+            Row(
+              children: List.generate(
+                card.cta!.length,
+                (index) => CtaButton(cta: card.cta![index]),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

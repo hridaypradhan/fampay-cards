@@ -43,7 +43,7 @@ class SmallCardWithArrow extends StatelessWidget {
           ),
           trailing: const Icon(
             Icons.chevron_right,
-            color: Colors.white,
+            color: primaryColor,
           ),
         ),
       ),

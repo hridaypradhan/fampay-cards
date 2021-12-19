@@ -15,7 +15,7 @@ class Hc5Description extends StatelessWidget {
       style: const TextStyle(
         fontSize: 14.74,
         fontWeight: FontWeight.w500,
-        color: logoColor,
+        color: primaryColor,
       ),
     );
   }

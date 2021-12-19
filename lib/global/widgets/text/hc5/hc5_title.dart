@@ -15,7 +15,7 @@ class Hc5Title extends StatelessWidget {
       style: const TextStyle(
         fontSize: 20.64,
         fontWeight: FontWeight.w600,
-        color: logoColor,
+        color: primaryColor,
       ),
     );
   }

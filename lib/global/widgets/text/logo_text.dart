@@ -13,7 +13,7 @@ class LogoText extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        color: logoColor,
+        color: primaryColor,
         fontSize: 19.89,
         fontWeight: FontWeight.w500,
       ),

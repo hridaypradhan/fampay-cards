@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const logoColor = Color(0xFF4C5454);
+const primaryColor = Color(0xFF4C5454);
 const homeBackgroundColor = Color(0xFFF7F6F3);
 const hc3IconColor = Color(0xFFFBAF03);
 
