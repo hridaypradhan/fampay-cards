@@ -18,7 +18,7 @@ This project was made using Flutter, as approved by the Fampay mentor on Discord
 - Swipe to refresh brings back all temporarily removed cards
 - All the elements used have been divided into smaller widgets in their own files
 - constants such as global widgets, colors etc are in their own folder. 
-- To change the URL, change the constant url variable in home_screen.dart
+- To change the URL, change the final 'url' variable in card_provider.dart
 - Types of cards:
   - HC1/Small Display Card: Shows Title, Description, Icon 
   - HC3/Big Display Card: Shows Title, bg image, all functional CTAs, description.
@@ -28,3 +28,4 @@ This project was made using Flutter, as approved by the Fampay mentor on Discord
 - Whenever details like text color, background color or gradient are not provided, default values are used.
 - Scrollability is checked and implemented according to the value found.
 - The app has been made to be able to scroll vertically as well, to suit smaller displays
+- The roboto font family has been applied to the entire app

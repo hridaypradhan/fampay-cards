@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:fampay_cards/models/gradient.dart';
-import 'package:fampay_cards/models/card_image.dart';
-import 'package:fampay_cards/models/cta.dart';
-import 'package:fampay_cards/models/formatted_text.dart';
+import 'gradient.dart';
+import 'card_image.dart';
+import 'cta.dart';
+import 'formatted_text.dart';
 
 class FampayCard {
   FampayCard({

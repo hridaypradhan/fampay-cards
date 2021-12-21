@@ -1,4 +1,4 @@
-import 'package:fampay_cards/global/widgets/text/logo_text.dart';
+import 'text/logo_text.dart';
 import 'package:flutter/material.dart';
 
 class LogoWidget extends StatelessWidget {

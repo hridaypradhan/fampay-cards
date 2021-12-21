@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Reusable global widget for HC1 and HC6
 class CustomListTile extends StatelessWidget {
   final Widget? leading, trailing, title, subtitle;
   const CustomListTile({

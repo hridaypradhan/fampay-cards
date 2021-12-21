@@ -1,5 +1,5 @@
-import 'package:fampay_cards/global/constants/colors.dart';
-import 'package:fampay_cards/models/formatted_text.dart';
+import '../../../constants/colors.dart';
+import '../../../../models/formatted_text.dart';
 import 'package:flutter/material.dart';
 
 class Hc1FormattedDescription extends StatelessWidget {

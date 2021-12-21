@@ -1,4 +1,4 @@
-import 'package:fampay_cards/global/constants/colors.dart';
+import '../../../constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class Hc3Title extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:fampay_cards/global/constants/colors.dart';
-import 'package:fampay_cards/models/cta.dart';
+import '../constants/colors.dart';
+import '../../models/cta.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

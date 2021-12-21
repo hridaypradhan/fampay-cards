@@ -1,19 +1,20 @@
-import 'package:fampay_cards/global/constants/colors.dart';
-import 'package:fampay_cards/global/widgets/cta_button.dart';
-import 'package:fampay_cards/global/widgets/text/hc3/hc3_description.dart';
-import 'package:fampay_cards/global/widgets/text/hc3/hc3_formatted_description.dart';
-import 'package:fampay_cards/global/widgets/text/hc3/hc3_formatted_title.dart';
-import 'package:fampay_cards/global/widgets/text/hc3/hc3_title.dart';
-import 'package:fampay_cards/models/contextual_card.dart';
-import 'package:fampay_cards/models/card_image.dart';
-import 'package:fampay_cards/models/gradient.dart';
-import 'package:fampay_cards/providers/card_provider.dart';
+import '../../../global/constants/colors.dart';
+import '../../../global/widgets/cta_button.dart';
+import '../../../global/widgets/text/hc3/hc3_description.dart';
+import '../../../global/widgets/text/hc3/hc3_formatted_description.dart';
+import '../../../global/widgets/text/hc3/hc3_formatted_title.dart';
+import '../../../global/widgets/text/hc3/hc3_title.dart';
+import '../../../models/contextual_card.dart';
+import '../../../models/card_image.dart';
+import '../../../models/gradient.dart';
+import '../../../providers/card_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BigDisplayCard extends StatefulWidget {
   final FampayCard card;
+
   const BigDisplayCard({
     Key? key,
     required this.card,
@@ -24,12 +25,16 @@ class BigDisplayCard extends StatefulWidget {
 }
 
 class _BigDisplayCardState extends State<BigDisplayCard> {
-  ScrollController scrollController = ScrollController();
-  bool isEnd = true;
+
+  final ScrollController _scrollController = ScrollController();
+
+  // Whether the card is closed or is showing the menu
+  bool _isEnd = true;
 
   @override
   Widget build(BuildContext context) {
     var cardProvider = Provider.of<CardProvider>(context);
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -39,7 +44,7 @@ class _BigDisplayCardState extends State<BigDisplayCard> {
       width: MediaQuery.of(context).size.width * 0.95,
       child: SingleChildScrollView(
         reverse: true,
-        controller: scrollController,
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         child: Row(
@@ -67,14 +72,14 @@ class _BigDisplayCardState extends State<BigDisplayCard> {
                   ? null
                   : () async => await launch(widget.card.url ?? ''),
               onLongPress: () {
-                scrollController.animateTo(
-                  isEnd
-                      ? scrollController.position.minScrollExtent
-                      : scrollController.position.maxScrollExtent,
+                _scrollController.animateTo(
+                  _isEnd
+                      ? _scrollController.position.minScrollExtent
+                      : _scrollController.position.maxScrollExtent,
                   duration: const Duration(milliseconds: 600),
                   curve: Curves.decelerate,
                 );
-                isEnd = !isEnd;
+                _isEnd = !_isEnd;
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.95,
@@ -121,10 +126,12 @@ class _BigDisplayCardState extends State<BigDisplayCard> {
   }
 }
 
+// Reusable widget for the menu button ('remind me' and 'dismiss now')
 class Hc3SlidableButton extends StatelessWidget {
   final IconData icon;
   final String text;
   final Function onPressed;
+  
   const Hc3SlidableButton({
     Key? key,
     required this.icon,

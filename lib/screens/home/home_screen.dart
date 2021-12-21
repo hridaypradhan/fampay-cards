@@ -1,15 +1,13 @@
-import 'package:fampay_cards/global/constants/colors.dart';
-import 'package:fampay_cards/global/widgets/logo_widget.dart';
-import 'package:fampay_cards/providers/card_provider.dart';
-import 'package:fampay_cards/screens/home/widgets/card_group_widget.dart';
+import '../../global/constants/colors.dart';
+import '../../global/widgets/logo_widget.dart';
+import '../../providers/card_provider.dart';
+import 'widgets/card_group_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeScreen extends StatefulWidget {
   static const id = '/home_screen';
-  static const url =
-      'https://run.mocky.io/v3/fefcfbeb-5c12-4722-94ad-b8f92caad1ad';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -17,7 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  RefreshController refreshController = RefreshController();
+  final RefreshController _refreshController = RefreshController();
+
   @override
   Widget build(BuildContext context) {
     var cardProvider = Provider.of<CardProvider>(context);
@@ -27,9 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SmartRefresher(
           onRefresh: () {
             cardProvider.refresh();
-            refreshController.refreshCompleted();
+            _refreshController.refreshCompleted();
           },
-          controller: refreshController,
+          controller: _refreshController,
           child: SingleChildScrollView(
             child: Column(
               children: [

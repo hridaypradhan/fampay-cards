@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fampay_cards/global/constants/colors.dart';
+import '../global/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class FampayGradient {

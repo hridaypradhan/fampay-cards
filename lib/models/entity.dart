@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:fampay_cards/global/constants/colors.dart';
-import 'package:fampay_cards/global/constants/enums.dart';
+import '../global/constants/colors.dart';
+import '../global/constants/enums.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,6 +35,7 @@ class Entity {
         "font_style": fontStyle,
       };
 
+  // Method to format a given text, replacing all the '{}'s with the relevant entities
   static TextSpan formatText(String text, Entity entity) {
     return TextSpan(
       text: text,

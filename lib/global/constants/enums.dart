@@ -1,12 +1,12 @@
-// ignore_for_file: constant_identifier_names
-
-import 'package:fampay_cards/models/contextual_card.dart';
-import 'package:fampay_cards/screens/home/widgets/big_display_card.dart';
-import 'package:fampay_cards/screens/home/widgets/dynamic_width_card.dart';
-import 'package:fampay_cards/screens/home/widgets/image_card.dart';
-import 'package:fampay_cards/screens/home/widgets/small_card_with_arrow.dart';
-import 'package:fampay_cards/screens/home/widgets/small_display_card.dart';
+import '../../models/contextual_card.dart';
+import '../../screens/home/widgets/big_display_card.dart';
+import '../../screens/home/widgets/dynamic_width_card.dart';
+import '../../screens/home/widgets/image_card.dart';
+import '../../screens/home/widgets/small_card_with_arrow.dart';
+import '../../screens/home/widgets/small_display_card.dart';
 import 'package:flutter/material.dart';
+
+// Enums have been implemented as classes to be able to include relevant methods
 
 class DesignTypeEnum {
   static const hc1 = "HC1";
@@ -15,7 +15,8 @@ class DesignTypeEnum {
   static const hc6 = "HC6";
   static const hc9 = "HC9";
 
-  static Widget toWidget(String designType, FampayCard card, int height) {
+  // One method to get specific cards from the supplied design type
+  static Widget toWidget(String designType, FampayCard card, int parentHeight) {
     switch (designType) {
       case hc1:
         return SmallDisplayCard(card: card);
@@ -28,7 +29,7 @@ class DesignTypeEnum {
       case hc9:
         return DynamicWidthCard(
           card: card,
-          height: height,
+          parentHeight: parentHeight,
         );
       default:
         return Container();

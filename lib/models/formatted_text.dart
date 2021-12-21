@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fampay_cards/models/entity.dart';
+import 'entity.dart';
 import 'package:flutter/material.dart';
 
 class FormattedText {
@@ -28,6 +28,7 @@ class FormattedText {
         "entities": List<dynamic>.from(entities.map((x) => x.toMap())),
       };
 
+  // Generate list of formatted tokens from the given string
   static List<InlineSpan> toWidget(FormattedText? formattedText) {
     var children = <InlineSpan>[];
     int entityIndex = 0;

@@ -51,7 +51,7 @@ class CardImage {
           ? null
           : DecorationImage(
               opacity: opacity,
-              image: AssetImage(cardImage.assetType ?? 'b'),
+              image: AssetImage(cardImage.assetType ?? ''),
             );
     } else {
       return cardImage.assetType == null
@@ -59,7 +59,7 @@ class CardImage {
           : DecorationImage(
               fit: BoxFit.fitHeight,
               opacity: opacity,
-              image: NetworkImage(cardImage.imageUrl ?? 'a'),
+              image: NetworkImage(cardImage.imageUrl ?? ''),
             );
     }
   }

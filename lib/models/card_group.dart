@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fampay_cards/models/contextual_card.dart';
+import 'contextual_card.dart';
 
 class CardGroup {
   CardGroup({
