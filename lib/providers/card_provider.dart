@@ -15,14 +15,24 @@ class CardProvider extends ChangeNotifier {
   */
   bool _gotInitialData = false;
 
+  bool _errorFetchingData = false, _loading = true;
+
   final String _url =
       'https://run.mocky.io/v3/fefcfbeb-5c12-4722-94ad-b8f92caad1ad';
 
   // Method to fetch data from the API
-  getData() async {
+  Future<void> getData() async {
     var response = await get(
       Uri.parse(_url),
     );
+
+    if (response.body.isEmpty) {
+      _errorFetchingData = true;
+      _setLoading(false);
+      notifyListeners();
+
+      return;
+    }
 
     Map<String, dynamic> cardGroupData = jsonDecode(response.body);
 
@@ -41,12 +51,13 @@ class CardProvider extends ChangeNotifier {
     );
 
     _gotInitialData = true;
+    _setLoading(false);
 
     notifyListeners();
   }
 
   // When 'remind me' is pressed, remove the card from visible cards
-  temporaryRemoval(FampayCard toHide) {
+  temporarilyRemove(FampayCard toHide) {
     for (int i = 0; i < _visibleCardGroups.length; i++) {
       for (int j = 0; j < _visibleCardGroups[i].cards.length; j++) {
         if (_visibleCardGroups[i].cards[j] == toHide) {
@@ -57,9 +68,9 @@ class CardProvider extends ChangeNotifier {
       }
     }
   }
- 
+
   // When 'dismiss now' is pressed, remove the card from list of cards and refresh
-  permanentRemoval(FampayCard toDelete) {
+  permanentlyRemove(FampayCard toDelete) {
     for (int i = 0; i < _cardGroups.length; i++) {
       for (int j = 0; j < _cardGroups[i].cards.length; j++) {
         if (_cardGroups[i].cards[j] == toDelete) {
@@ -79,8 +90,15 @@ class CardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  _setLoading(bool toSet) {
+    _loading = toSet;
+    notifyListeners();
+  }
+
   // Getter methods for all private variables that are in use elsewhere
   List<CardGroup> get visibleCardGroups => _visibleCardGroups;
   List<CardGroup> get cardGroups => _cardGroups;
   bool get gotInitialData => _gotInitialData;
+  bool get errorFetchingData => _errorFetchingData;
+  bool get loading => _loading;
 }

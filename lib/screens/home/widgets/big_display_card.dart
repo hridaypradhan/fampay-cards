@@ -55,14 +55,14 @@ class _BigDisplayCardState extends State<BigDisplayCard> {
                   icon: Icons.notifications,
                   text: 'remind me',
                   onPressed: () {
-                    cardProvider.temporaryRemoval(widget.card);
+                    cardProvider.temporarilyRemove(widget.card);
                   },
                 ),
                 Hc3SlidableButton(
                   icon: Icons.close,
                   text: 'dismiss now',
                   onPressed: () {
-                    cardProvider.permanentRemoval(widget.card);
+                    cardProvider.permanentlyRemove(widget.card);
                   },
                 ),
               ],

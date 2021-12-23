@@ -43,15 +43,39 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (!cardProvider.gotInitialData) {
                         cardProvider.getData();
                       }
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: List.generate(
-                          cardProvider.visibleCardGroups.length,
-                          (index) => CardGroupWidget(
-                            cardGroup: cardProvider.visibleCardGroups[index],
-                          ),
-                        ),
-                      );
+
+                      return cardProvider.loading
+                          ? Column(
+                              children: const [
+                                CircularProgressIndicator(),
+                                SizedBox(height: 20.0),
+                                Text('Loading...'),
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: cardProvider.errorFetchingData
+                                  ? [
+                                      const Padding(
+                                        padding: EdgeInsets.all(20.0),
+                                        child: Text(
+                                          'Error fetching data.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ]
+                                  : List.generate(
+                                      cardProvider.visibleCardGroups.length,
+                                      (index) => CardGroupWidget(
+                                        cardGroup: cardProvider
+                                            .visibleCardGroups[index],
+                                      ),
+                                    ),
+                            );
                     },
                   ),
                   decoration: const BoxDecoration(
